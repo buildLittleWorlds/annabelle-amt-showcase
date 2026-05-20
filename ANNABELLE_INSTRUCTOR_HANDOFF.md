@@ -53,6 +53,18 @@ Suggested GitHub Pages URL pattern:
 https://YOUR-GITHUB-USERNAME.github.io/annabelle-amt-showcase/
 ```
 
+Current instructor demo:
+
+```text
+https://buildlittleworlds.github.io/annabelle-amt-showcase/
+```
+
+Current source repo:
+
+```text
+https://github.com/buildLittleWorlds/annabelle-amt-showcase
+```
+
 **Student-owned version:**
 
 Annabelle copies the same `docs/` folder into her own repo and changes the text so it is written in her voice. She should update the links to her own GitHub repo and Hugging Face Spaces.
@@ -168,6 +180,8 @@ Then give her this simple ownership checklist:
 6. Test the upload tab with a short audio clip.
 7. Copy the Space link.
 
+Status note: the Hugging Face Space files are ready, but the instructor-owned demo Space has not been deployed from this machine because the local `hf` CLI is not logged in.
+
 ### Paper demo
 
 1. Keep the paper plan in `paper/ANNABELLE_PUBLISHABLE_PAPER_PLAN.md`.
@@ -193,4 +207,3 @@ There are three parts:
 Your job is to make the final version yours: revise the language, update the links, add your own screenshots and test cases, and explain what you learned from building it.
 
 We will use the model version first so you can see the destination, then we will walk through how to reproduce it in your own GitHub and Hugging Face accounts.
-

@@ -13,6 +13,12 @@ This package turns Annabelle's current AI music-transcription coursework into th
 3. Help her duplicate or create a new Hugging Face Space and upload the files from `huggingface-space/`.
 4. Ask her to revise `PAPER.md` using the paper plan, especially the methods/results/discussion sections.
 
+## Current instructor demo
+
+- GitHub repo: <https://github.com/buildLittleWorlds/annabelle-amt-showcase>
+- GitHub Pages site: <https://buildlittleworlds.github.io/annabelle-amt-showcase/>
+- Hugging Face instructor demo Space: not deployed from this machine yet because the local `hf` CLI is not logged in. The Space files are ready in `huggingface-space/`.
+
 ## Deployment note
 
 This bundle is safe to deploy under the instructor's account as a clearly labeled model/demo. It should not be represented as Annabelle's finished student-authored submission until she revises it, runs her own tests, and links her own final artifacts.
