@@ -1,0 +1,26 @@
+You are working in a repository that contains a handoff bundle for Annabelle Li's final AI music transcription project.
+
+First, read:
+- AGENTS.md
+- CODEX_HANDOFF.md
+- ANNABELLE_INSTRUCTOR_HANDOFF.md
+- ANNABELLE_STUDENT_REPRODUCTION_WALKTHROUGH.md
+
+Then inspect:
+- docs/index.html
+- docs/styles.css
+- docs/script.js
+- paper/ANNABELLE_PUBLISHABLE_PAPER_PLAN.md
+- huggingface-space/app.py
+- huggingface-space/README.md
+
+Goal: turn this into a clean instructor-deployable showcase repo and a student-reproducible handoff package.
+
+Please do the following:
+1. Check for missing files, broken local references, confusing placeholders, or unclear public-facing language.
+2. Make small, concrete edits that improve the handoff without changing the basic project concept.
+3. Ensure the website can publish from /docs on GitHub Pages.
+4. Ensure the Hugging Face Space folder is coherent and has no hard-coded secrets.
+5. Keep clear distinctions between instructor model/demo materials and Annabelle's own student-authored final version.
+6. Run lightweight checks only, such as Python syntax checking for app.py. Do not install heavy dependencies unless necessary.
+7. Summarize the changes you made and give the exact next deployment steps for GitHub Pages and Hugging Face Spaces.

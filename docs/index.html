@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Annabelle Li — AI Music Transcription Research</title>
+  <meta name="description" content="A student research portfolio testing whether lightweight AI music transcription can produce sheet music that musicians can actually use." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="#top">Annabelle Li</a>
+      <div class="nav-links">
+        <a href="#research">Research</a>
+        <a href="#results">Results</a>
+        <a href="#app">App</a>
+        <a href="#paper">Paper</a>
+      </div>
+    </nav>
+
+    <section id="top" class="hero-grid">
+      <div>
+        <p class="eyebrow">Music AI · Automatic Music Transcription · Performer-Centered Evaluation</p>
+        <h1>When AI turns sound into sheet music, does it make something a musician can actually use?</h1>
+        <p class="lede">
+          This project tests a lightweight automatic music transcription pipeline built on Hugging Face Spaces.
+          The goal is not just to generate MIDI or a score-looking image, but to ask whether the result preserves the musical information a performer needs: pitch, rhythm, meter, dynamics, voicing, and readability.
+        </p>
+        <p class="model-note">
+          Instructor-prepared model showcase based on Annabelle's public coursework. The student-owned final version should revise the wording, examples, screenshots, and links in Annabelle's own voice.
+        </p>
+        <div class="button-row">
+          <a class="button primary" href="https://huggingface.co/spaces/annabelle-li/amt-report-card">Open Annabelle's AMT Report Card</a>
+          <a class="button" href="https://github.com/annabelle-z-li/AI-research-level-2/blob/main/PAPER.md">Read the paper</a>
+          <a class="button" href="https://huggingface.co/annabelle-li">Hugging Face profile</a>
+        </div>
+      </div>
+
+      <aside class="hero-card" aria-label="Project summary">
+        <h2>Project at a glance</h2>
+        <dl>
+          <div><dt>Core tool</dt><dd>Audio → MIDI → MusicXML → Sheet Music</dd></div>
+          <div><dt>Main model</dt><dd>Spotify Basic Pitch, ONNX backend</dd></div>
+          <div><dt>Notation stack</dt><dd>music21 + LilyPond</dd></div>
+          <div><dt>Evaluator</dt><dd>AMT Report Card: pitch, timing, rhythm, dynamics</dd></div>
+          <div><dt>Main finding</dt><dd>Pitch detection is not the same as musical representation.</dd></div>
+        </dl>
+      </aside>
+    </section>
+  </header>
+
+  <main>
+    <section id="research" class="section narrow">
+      <p class="eyebrow">Research question</p>
+      <h2>What happens when a student-accessible AI transcription tool has to produce performer-readable notation?</h2>
+      <p>
+        Annabelle’s research asks how the architectural and computational constraints of AI music transcription systems affect their ability to represent musical information — especially pitch, rhythm, dynamics, instrumentation, and notation readability.
+      </p>
+      <p>
+        The key distinction is simple: a model can detect notes and still fail to create a score. Musicians do not need a literal dump of sound events. They need a readable map: meter, grouping, voice separation, rhythm, phrasing, and enough abstraction to make performance possible.
+      </p>
+    </section>
+
+    <section class="section">
+      <div class="split">
+        <div>
+          <p class="eyebrow">Pipeline</p>
+          <h2>From audio to notation</h2>
+          <p>
+            The current system starts with an audio upload, uses Basic Pitch to produce MIDI, converts MIDI into MusicXML with music21, and renders a score with LilyPond. The improved AMT Report Card adds a reference-MIDI comparison so the output can be scored rather than only described.
+          </p>
+        </div>
+        <div class="pipeline" role="img" aria-label="Audio input to Basic Pitch to MIDI to music21 to LilyPond to AMT Report Card">
+          <div>Audio input</div>
+          <span>↓</span>
+          <div>Basic Pitch</div>
+          <span>↓</span>
+          <div>MIDI note events</div>
+          <span>↓</span>
+          <div>music21 + LilyPond</div>
+          <span>↓</span>
+          <div>Score + report card</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="results" class="section">
+      <p class="eyebrow">Tests</p>
+      <h2>Three increasingly difficult musical inputs</h2>
+      <p class="section-intro">
+        The project uses three test cases: a C major scale, <em>Twinkle Twinkle Little Star</em>, and Bach’s Minuet in G. Together they show how the system behaves as the input moves from a simple monophonic baseline toward real repertoire.
+      </p>
+
+      <div class="test-tabs" aria-label="Test case selector">
+        <button class="tab active" data-case="scale">C major scale</button>
+        <button class="tab" data-case="twinkle">Twinkle Twinkle</button>
+        <button class="tab" data-case="minuet">Minuet in G</button>
+      </div>
+
+      <article class="case-card" id="case-card">
+        <div>
+          <h3 id="case-title">C major scale</h3>
+          <p id="case-summary">The simplest baseline. The pitch contour mostly survives, but the rhythm is wrong enough that the notation is barely performable.</p>
+          <ul id="case-points">
+            <li>Pitch contour loosely visible.</li>
+            <li>Uniform quarter notes become uneven durations.</li>
+            <li>This shows that rhythm fails even before polyphony becomes an issue.</li>
+          </ul>
+        </div>
+        <figure>
+          <img id="case-image" alt="Output score for C major scale" src="https://raw.githubusercontent.com/annabelle-z-li/AI-research-level-2/main/assets/scale-output.png" />
+          <figcaption id="case-caption">Actual output from the Music to Sheet Music pipeline.</figcaption>
+        </figure>
+      </article>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Musical dimension</th>
+              <th>C major scale</th>
+              <th>Twinkle Twinkle</th>
+              <th>Minuet in G</th>
+              <th>Pattern</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Pitch contour</td><td>Partly survives</td><td>Buried by false notes</td><td>Mostly lost</td><td>Degrades with texture</td></tr>
+            <tr><td>Rhythm</td><td>Wrong</td><td>Wrong</td><td>Wrong</td><td>Fails across all tests</td></tr>
+            <tr><td>Meter</td><td>Mostly correct</td><td>Unstable</td><td>Wrong</td><td>No reliable meter inference</td></tr>
+            <tr><td>Voicing</td><td>Not central</td><td>False chord clusters</td><td>Dense false chords</td><td>Overtones become notes</td></tr>
+            <tr><td>Dynamics</td><td>Absent</td><td>Absent</td><td>Absent</td><td>Not represented</td></tr>
+            <tr><td>Performer readability</td><td>Barely usable</td><td>Unusable</td><td>Unusable</td><td>Score-looking output is not score usability</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="app" class="section accent">
+      <div class="split">
+        <div>
+          <p class="eyebrow">Final app direction</p>
+          <h2>AMT Musician Lab</h2>
+          <p>
+            The instructor demo app combines the original transcription tool and the AMT Report Card. A user uploads audio, optionally uploads a reference MIDI, and receives a musician-facing report: downloadable MIDI, MusicXML, note-event CSV, score viewer, timing metrics, pitch/rhythm scores, and a plain-language usability review.
+          </p>
+          <a class="button primary" href="https://huggingface.co/spaces/annabelle-li/amt-report-card">Current AMT Report Card</a>
+        </div>
+        <div class="feature-grid">
+          <div><strong>Transcription</strong><span>Audio to MIDI/MusicXML</span></div>
+          <div><strong>Scoring</strong><span>Compare to reference MIDI</span></div>
+          <div><strong>Readability</strong><span>Explain performer problems</span></div>
+          <div><strong>Artifacts</strong><span>Download reproducible outputs</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="paper" class="section narrow">
+      <p class="eyebrow">Paper argument</p>
+      <h2>Pitch detection is not musical representation.</h2>
+      <p>
+        The paper becomes stronger when it makes this distinction explicit. Basic Pitch can produce MIDI note events, but readable notation requires higher-level musical interpretation: beat, meter, phrase grouping, key, voicing, dynamics, and performer usability. The project’s contribution is to make that gap visible and measurable.
+      </p>
+      <blockquote>
+        A transcription that gets some pitches right but loses rhythm, meter, and voicing is not yet a score. It is evidence that the hardest part of transcription begins after the model has detected sound events.
+      </blockquote>
+      <div class="button-row centered">
+        <a class="button" href="https://github.com/annabelle-z-li/AI-research-level-2">GitHub research repo</a>
+        <a class="button" href="https://github.com/annabelle-z-li/AI-research-level-2/blob/main/research-journal.md">Research journal</a>
+        <a class="button" href="https://github.com/annabelle-z-li/AI-research-level-2/blob/main/PAPER.md">Paper draft</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Instructor-prepared model showcase for Annabelle Li's AI + music transcription research. Student-owned copies should be revised in Annabelle's own voice.</p>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
